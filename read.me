@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Story Writing Platform</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Welcome to the Story Writing Platform</h1>
+    </header>
+    <main>
+        <section>
+            <h2>Write Your Story</h2>
+            <textarea id="storyInput" placeholder="Start writing your story here..."></textarea>
+            <button id="saveButton">Save Story</button>
+            <button id="publishButton">Publish Story</button>
+        </section>
+        <section id="storyOutput">
+            <h2>Your Published Story</h2>
+            <div id="storyDisplay"></div>
+        </section>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f4f4f4;
+}
+
+header {
+    background: #35424a;
+    color: #ffffff;
+    padding: 10px 0;
+    text-align: center;
+}
+
+h1, h2 {
+    margin: 0;
+}
+
+textarea {
+    width: 100%;
+    height: 200px;
+    margin-top: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    margin-top: 10px;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    background-color: #35424a;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+#storyOutput {
+    margin-top: 20px;
+    padding: 10px;
+    background: #ffffff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+document.getElementById('saveButton').addEventListener('click', function() {
+    const story = document.getElementById('storyInput').value;
+    localStorage.setItem('savedStory', story);
+    alert('Story saved successfully!');
+});
+
+document.getElementById('publishButton').addEventListener('click', function() {
+    const publishedStory = localStorage.getItem('savedStory');
+    if (publishedStory) {
+        document.getElementById('storyDisplay').innerText = publishedStory;
+    } else {
+        alert('Please save your story before publishing.');
+    }
+});
